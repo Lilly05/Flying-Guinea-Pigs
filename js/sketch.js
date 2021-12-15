@@ -75,8 +75,8 @@ function draw() {
       text("Press ENTER to play again", background.width/2 - 30, 600);
     }else{
       textAlign(CENTER, CENTER);
-      textSize(80);
-      textFont(font);
+      textSize(60);
+      textFont(GameOverFont);
       fill(255);
       text("Flying Guinea Pigs", background.width/2 - 30, 200);
       image(logo, game_size[0]/2-125, 200);
