@@ -1,4 +1,4 @@
-let background, player, pipe_bottom, pipe_top;
+let background, player, pipe_bottom, pipe_top, logo, GameOverLogo;
 let game_size = [572, 1014];
 let game_running = false;
 let game_started = false;
@@ -18,6 +18,8 @@ function preload() {
   pipe_top = loadImage("media/top_pipe.png");
   font = loadFont('media/Crumbled-Pixels.ttf');
   GameOverFont = loadFont('media/PIXEL-LI.TTF');
+  logo = loadImage("media/logo.png");
+  GameOverLogo = loadImage("media/gameoverlogo.png")
 }
 
 function setup() {
@@ -25,6 +27,7 @@ function setup() {
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
   player.resize(0, 125);
+  logo.resize(0, 400);
 }
 
 function play() {
@@ -49,15 +52,6 @@ function play() {
     pipe[0] = game_size[0];
     pipe[1] = 50 + random(game_size[1] - 200);
     pipe_gab = 200 + random(50);
-    textAlign(CENTER, CENTER);
-    textSize(100);
-    textFont(GameOverFont);
-    fill(255);
-    text("Game Over", background.width/2-30, 200);
-    textSize(80);
-    textFont(font);
-    fill(255);
-    text("Press ENTER to play again", background.width/2 - 30, 600);
     game_running = false;
     GameOver = true;
   }
@@ -74,17 +68,23 @@ function draw() {
       textFont(GameOverFont);
       fill(255);
       text("Game Over", background.width/2-30, 200);
+      image(GameOverLogo,game_size[0]/2-125, 250)
       textSize(50);
       textFont(font);
       fill(255);
       text("Press ENTER to play again", background.width/2 - 30, 600);
     }else{
-    textAlign(CENTER, CENTER);
-    textSize(60);
-    textFont(font);
-    fill(255);
-    text("Flying Guinea Pigs", background.width/2 - 30, 200);
-    text("Press SPACE to start", background.width/2 - 30, 600);
+      textAlign(CENTER, CENTER);
+      textSize(80);
+      textFont(font);
+      fill(255);
+      text("Flying Guinea Pigs", background.width/2 - 30, 200);
+      image(logo, game_size[0]/2-125, 200);
+      textAlign(CENTER, CENTER);
+      textSize(60);
+      textFont(font);
+      fill(255);
+      text("Press SPACE to start", background.width/2 - 30, 600);
     }
     
   } else {
