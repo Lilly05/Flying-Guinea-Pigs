@@ -49,9 +49,9 @@ function play() {
 
   if(collision(player, playercoordinates[0], playercoordinates[1], pipe_top, pipe[0], pipe[1]-pipe_top.height)||
   collision(player, playercoordinates[0], playercoordinates[1], pipe_bottom, pipe[0], pipe[1]+ pipe_gab)){
-    pipe[0] = game_size[0];
-    pipe[1] = 50 + random(game_size[1] - 200);
-    pipe_gab = 200;
+  //  pipe[0] = game_size[0];
+  //  pipe[1] = 50 + random(game_size[1] - 200);
+  //  pipe_gab = 200;
     game_running = false;
     GameOver = true;
   }
@@ -59,24 +59,24 @@ function play() {
 }
 
 function collision(im1,x1,y1, im2,x2,y2){
- 
-
-
-  if((x1+im1.width < x2) || (x1 > x2+im2.width)||(y1+im1.height < y2) || (y1 > y2 +im2.height)){
+  if((x1 + im1.width < x2) || (x1 > x2 + im2.width) || (y1 + im1.height < y2) || (y1 > y2 + im2.height)) {
     return false; // Keine Kollision
-  }else{
-    console.log((x1+im1.width) < x2);
-    console.log(x1 > x2+im2.width);
-    console.log(y1+im1.height < y2);
-    console.log(y1 > y2 +im2.height);
-    console.log("im1.height:" + im1.height);
-    console.log("im1.width:" + im1.width);
-    console.log("x1:" + x1);
-    console.log("x2:" + x2);
-    console.log("im2.width" + im2.width);
-    console.log("im2.height:" + im2.height);
-    console.log("y1" + y1);
-    console.log("y2" + y2);
+  } else {
+    console.log((x1 + im1.width < x2));
+    console.log((x1 > x2 + im2.width));
+    console.log((y1 + im1.height < y2));
+    console.log((y1 > y2 + im2.height));
+    console.log("im1.height: " + im1.height);
+    console.log("im1.width: " + im1.width);
+    console.log("x1: " + x1);
+    console.log("x2: " + x2);
+    console.log("im2.width: " + im2.width);
+    console.log("im2.height: " + im2.height);
+    console.log("y1: " + y1);
+    console.log("y2: " + y2);
+    
+    noLoop(); // todo: delete
+
     return true; // Es findet eine Kollision statt
   }
 }
@@ -96,7 +96,7 @@ function draw() {
       textFont(font);
       fill(255);
       text("Press ENTER to play again", background.width/2 - 30, 600);
-    }else{
+    } else {
       textAlign(CENTER, CENTER);
       textSize(60);
       textFont(GameOverFont);
