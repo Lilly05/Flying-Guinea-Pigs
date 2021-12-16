@@ -4,7 +4,7 @@ let game_running = false;
 let game_started = false;
 let GameOver = false;
 let pipe = [800, 380];
-let pipe_gab = 200;
+let pipe_gab = 175;
 let pipe_speed = 5;
 let jump = 0;
 let playercoordinates = [100, 350];
@@ -35,7 +35,7 @@ function play() {
   if(pipe[0] < -pipe_top.width){
     pipe[0] = game_size[0];
     pipe[1] = 50 + random(game_size[1] - 200);
-    pipe_gab = 200;
+    pipe_gab = 175;
   }
   image(pipe_top, pipe[0], pipe[1]- pipe_top.height); // x Koordinate von der oberen Säule
   image(pipe_bottom, pipe[0], pipe[1]+ pipe_gab); // y Koordinate von der unteren Säule
@@ -47,9 +47,9 @@ function play() {
   image(player, playercoordinates[0], playercoordinates[1]);
 
   if(collision(player, playercoordinates[0], playercoordinates[1], pipe_top, pipe[0], pipe[1]-pipe_top.height, pipe[1]+ pipe_gab)){
-  //  pipe[0] = game_size[0];
-  //  pipe[1] = 50 + random(game_size[1] - 200);
-  //  pipe_gab = 200;
+    pipe[0] = game_size[0];
+    pipe[1] = 50 + random(game_size[1] - 200);
+    pipe_gab =  175;
     game_running = false;
     GameOver = true;
   }
@@ -58,18 +58,17 @@ function play() {
 
 function collision(im1,x1,y1, im2,x2,y2, y3){
   if((x1 + im1.width / 2) > x2) { // Hier wird geprüft: trifft die Nase des Schweins in der Horizontalen auf eine Säule
-    if(y1 > y2 && y1 < (y2 + im2.height)){ // Hier wird geprüft: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der oberen Säule befindet
-      noLoop();
+    if(y1 > y2 && y1 < (y2 + im2.height -50)){ // Hier wird geprüft: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der oberen Säule befindet
+      //noLoop();
       return true;
     }else{
-      if(y1 > y3){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
+      if(y1 > y3 -50){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
         return true;
         
       }else{
         return false;
       }
     }
-
 
     /*
     console.log((x1 + im1.width < x2));
