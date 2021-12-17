@@ -13,7 +13,7 @@ let x = 0;
 
 function preload() {
   // Lädt die Bilder
-  background = loadImage("media/bg3.png");
+  background = loadImage("media/backgroundfinal.jpg");
   player = loadImage("media/player.png");
   pipe_bottom = loadImage("media/bottom_pipe2.png");
   pipe_top = loadImage("media/top_pipe2.png");
@@ -24,11 +24,12 @@ function preload() {
 }
 
 function setup() {
-  game_size = [425, windowHeight];
+  game_size = [550, windowHeight-100];
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
   player.resize(0, 125);
   logo.resize(0, 400);
+  background.resize(572, 1014);
 }
 
 function play() {
@@ -107,7 +108,7 @@ function draw() {
       textAlign(CENTER, CENTER);
       textSize(100);
       textFont(GameOverFont);
-      fill(255);
+      fill(000);
       text("Game Over", background.width/2, 200);
       image(GameOverLogo,game_size[0]/2-125, 250)
       textSize(50);
@@ -118,7 +119,7 @@ function draw() {
       textAlign(CENTER, CENTER);
       textSize(50);
       textFont(GameOverFont);
-      fill(255);
+      fill(000);
       text("Flying Guinea Pigs", background.width/2, 200);
       image(logo, game_size[0]/2-125, 200);
       textAlign(CENTER, CENTER);
