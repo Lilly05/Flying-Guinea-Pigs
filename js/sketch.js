@@ -67,7 +67,7 @@ function collision(im1,x1,y1, im2,x2,y2, y3){
         return false;
       }
     }else{
-      if(y1 > y3 - 50){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
+      if(y1 > y3 ){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
         if(x1 < x2){
           /*
           console.log((x1 + im1.width / 2) > x2);
