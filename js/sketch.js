@@ -5,7 +5,7 @@ let game_started = false;
 let GameOver = false;
 let pipe = [800, 380];
 let pipe_gab = 175;
-let pipe_speed = 5;
+let pipe_speed = 7;
 let jump = 0;
 let playercoordinates = [100, 350];
 let x = 0;
@@ -13,10 +13,10 @@ let x = 0;
 
 function preload() {
   // Lädt die Bilder
-  background = loadImage("media/backgroundfinal.jpg");
+  background = loadImage("media/background.jpg");
   player = loadImage("media/player.png");
-  pipe_bottom = loadImage("media/bottom_pipe2.png");
-  pipe_top = loadImage("media/top_pipe2.png");
+  pipe_bottom = loadImage("media/bottom_pipe3.png");
+  pipe_top = loadImage("media/top_pipe3.png");
   font = loadFont('media/Crumbled-Pixels.ttf');
   GameOverFont = loadFont('media/PIXEL-LI.TTF');
   logo = loadImage("media/logo.png");
@@ -24,7 +24,7 @@ function preload() {
 }
 
 function setup() {
-  game_size = [550, windowHeight-100];
+  game_size = [500, windowHeight-50];
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
   player.resize(0, 125);
@@ -60,7 +60,7 @@ function play() {
 
 function collision(im1,x1,y1, im2,x2,y2, y3){
   if((x1 + im1.width / 2) > x2) { // Hier wird geprüft: trifft die Nase des Schweins in der Horizontalen auf eine Säule
-    if(y1 < (y2 + im2.height - 25)){ // Hier wird geprüft: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der oberen Säule befindet
+    if(y1 < (y2 + im2.height - 50)){ // Hier wird geprüft: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der oberen Säule befindet
       if(x1 < x2){
           //noLoop();
         return true;
@@ -68,7 +68,7 @@ function collision(im1,x1,y1, im2,x2,y2, y3){
         return false;
       }
     }else{
-      if(y1 > y3 ){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
+      if(y1 > y3 - 50){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
         if(x1 < x2){
           /*
           console.log((x1 + im1.width / 2) > x2);
@@ -90,7 +90,7 @@ function collision(im1,x1,y1, im2,x2,y2, y3){
     }
   }else if(y1 < 0){
     return true;
-  }else if(y1 > 800){
+  }else if(y1 > 1000){
     return true;
   }
   else {
@@ -109,24 +109,24 @@ function draw() {
       textSize(100);
       textFont(GameOverFont);
       fill(000);
-      text("Game Over", background.width/2, 200);
+      text("Game Over", background.width/2 - 30, 200);
       image(GameOverLogo,game_size[0]/2-125, 250)
       textSize(50);
       textFont(font);
       fill(255);
-      text("Press ENTER to play again", background.width/2 , 600);
+      text("Press ENTER to play again", background.width/2 - 30, 600);
     } else {
       textAlign(CENTER, CENTER);
-      textSize(50);
+      textSize(60);
       textFont(GameOverFont);
       fill(000);
-      text("Flying Guinea Pigs", background.width/2, 200);
+      text("Flying Guinea Pigs", background.width/2 - 30, 200);
       image(logo, game_size[0]/2-125, 200);
       textAlign(CENTER, CENTER);
       textSize(60);
       textFont(font);
       fill(255);
-      text("Press SPACE to start", background.width/2, 600);
+      text("Press SPACE to start", background.width/2 - 30, 600);
     }
     
   } else {
