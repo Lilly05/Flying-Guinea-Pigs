@@ -3,8 +3,8 @@ let game_size = [572, 1014];
 let game_running = false;
 let game_started = false;
 let GameOver = false;
-let pipe = [800, 380];
-let pipe_gab = 175;
+let pipe = [600, 800];
+let pipe_gab = 200;
 let pipe_speed = 7;
 let jump = 0;
 let playercoordinates = [100, 350];
@@ -15,8 +15,8 @@ function preload() {
   // Lädt die Bilder
   background = loadImage("media/background.jpg");
   player = loadImage("media/player.png");
-  pipe_bottom = loadImage("media/bottom_pipe3.png");
-  pipe_top = loadImage("media/top_pipe3.png");
+  pipe_bottom = loadImage("media/bottom_pipe4.png");
+  pipe_top = loadImage("media/top_pipe4.png");
   font = loadFont('media/Crumbled-Pixels.ttf');
   GameOverFont = loadFont('media/PIXEL-LI.TTF');
   logo = loadImage("media/logo.png");
@@ -24,6 +24,7 @@ function preload() {
 }
 
 function setup() {
+  //pipe_top.resize(300, 1000);
   game_size = [500, windowHeight-50];
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
@@ -61,7 +62,7 @@ function play() {
 function collision(im1,x1,y1, im2,x2,y2, y3){
   if((x1 + im1.width / 2) > x2) { // Hier wird geprüft: trifft die Nase des Schweins in der Horizontalen auf eine Säule
     if(y1 < (y2 + im2.height - 50)){ // Hier wird geprüft: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der oberen Säule befindet
-      if(x1 < x2){
+      if(x1 < x2 + 200){
           //noLoop();
         return true;
       }else{
@@ -69,7 +70,7 @@ function collision(im1,x1,y1, im2,x2,y2, y3){
       }
     }else{
       if(y1 > y3 - 50){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
-        if(x1 < x2){
+        if(x1 < x2 + 200){
           /*
           console.log((x1 + im1.width / 2) > x2);
           console.log(y1 > y,2 && y1 < (y2 + im2.height -50));
