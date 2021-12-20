@@ -9,11 +9,12 @@ let pipe_speed = 7;
 let jump = 0;
 let playercoordinates = [100, 350];
 let x = 0;
+let score = 0;
 
 
 function preload() {
   // Lädt die Bilder
-  background = loadImage("media/background.jpg");
+  background = loadImage("media/background2.JPG");
   player = loadImage("media/player.png");
   pipe_bottom = loadImage("media/bottom_pipe4.png");
   pipe_top = loadImage("media/top_pipe4.png");
@@ -21,6 +22,7 @@ function preload() {
   GameOverFont = loadFont('media/PIXEL-LI.TTF');
   logo = loadImage("media/logo.png");
   GameOverLogo = loadImage("media/gameoverlogo.png")
+  font2 = loadFont("media/Pixeled.ttf");
 }
 
 function setup() {
@@ -39,6 +41,7 @@ function play() {
     pipe[0] = game_size[0];
     pipe[1] = 50 + random(game_size[1] - 200);
     pipe_gab = 175;
+    score += 1;
   }
   image(pipe_top, pipe[0], pipe[1]- pipe_top.height); // x Koordinate von der oberen Säule
   image(pipe_bottom, pipe[0], pipe[1]+ pipe_gab); // y Koordinate von der unteren Säule
@@ -56,6 +59,7 @@ function play() {
     game_running = false;
     GameOver = true;
   }
+  text(score, 20, 30);
   
 }
 
@@ -69,7 +73,7 @@ function collision(im1,x1,y1, im2,x2,y2, y3){
         return false;
       }
     }else{
-      if(y1 > y3 - 50){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
+      if(y1 > y3 - 75){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
         if(x1 < x2 + 200){
           /*
           console.log((x1 + im1.width / 2) > x2);
@@ -107,19 +111,23 @@ function draw() {
     if (GameOver == true){
       playercoordinates = [100, 350];
       textAlign(CENTER, CENTER);
-      textSize(100);
-      textFont(GameOverFont);
+      textSize(50);
+      textFont(font2);
       fill(000);
       text("Game Over", background.width/2 - 30, 200);
       image(GameOverLogo,game_size[0]/2-125, 250)
+      textSize(30);
+      textFont(font2);
+      fill(255);
+      text("Score: " + score, background.width/2-30, 600);
       textSize(50);
       textFont(font);
       fill(255);
-      text("Press ENTER to play again", background.width/2 - 30, 600);
+      text("Press ENTER to play again", background.width/2 - 30, 700);
     } else {
       textAlign(CENTER, CENTER);
-      textSize(60);
-      textFont(GameOverFont);
+      textSize(30);
+      textFont(font2);
       fill(000);
       text("Flying Guinea Pigs", background.width/2 - 30, 200);
       image(logo, game_size[0]/2-125, 200);
@@ -145,6 +153,7 @@ function keyPressed(){
   if(GameOver == true){
     if(keyCode === ENTER){
       GameOver = false;
+      score = 0;
     }
     }
   }
