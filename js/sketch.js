@@ -5,24 +5,28 @@ let game_started = false;
 let GameOver = false;
 let pipe = [600, 800];
 let pipe_gab = 200;
-let pipe_speed = 7;
+let pipe_speed = 6;
 let jump = 0;
 let playercoordinates = [100, 350];
 let x = 0;
 let score = 0;
+let score10, score20 = 0;
+let player2unlocked, player3unlocked = false;
 
 
 function preload() {
   // Lädt die Bilder
-  background = loadImage("media/background2.JPG");
+  background = loadImage("media/background.JPG");
   player = loadImage("media/player.png");
-  pipe_bottom = loadImage("media/bottom_pipe4.png");
-  pipe_top = loadImage("media/top_pipe4.png");
+  pipe_bottom = loadImage("media/bottom_pipe.png");
+  pipe_top = loadImage("media/top_pipe.png");
   font = loadFont('media/Crumbled-Pixels.ttf');
-  GameOverFont = loadFont('media/PIXEL-LI.TTF');
   logo = loadImage("media/logo.png");
   GameOverLogo = loadImage("media/gameoverlogo.png")
   font2 = loadFont("media/Pixeled.ttf");
+  player1 = loadImage("media/player.png");
+  player2 = loadImage("media/player2.png");
+  player3 = loadImage("media/player3.png");
 }
 
 function setup() {
@@ -31,6 +35,9 @@ function setup() {
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
   player.resize(0, 125);
+  player1.resize(0, 125);
+  player2.resize(0,125);
+  player3.resize(0, 125);
   logo.resize(0, 400);
   background.resize(572, 1014);
 }
@@ -124,18 +131,70 @@ function draw() {
       textFont(font);
       fill(255);
       text("Press ENTER to play again", background.width/2 - 30, 700);
+      if(score >= 10){
+        score10 = score;
+      }
+      if(score >= 20){
+        score20 = score;
+      }
+      if(score10 >= 10){
+        player2unlocked = true;
+      }else{
+        player2unlocked = false;
+      }
+      if(score20 >= 20){
+        player3unlocked = true;
+      }else{
+        player3unlocked = false;
+      }
     } else {
       textAlign(CENTER, CENTER);
       textSize(30);
       textFont(font2);
       fill(000);
-      text("Flying Guinea Pigs", background.width/2 - 30, 200);
-      image(logo, game_size[0]/2-125, 200);
+      text("Flying Guinea Pigs", background.width/2 - 30, 100);
+      image(logo, background.width/2-175, 100);
       textAlign(CENTER, CENTER);
       textSize(60);
       textFont(font);
+      fill(000);
+      text("Press SPACE to start", background.width/2 - 30, 450);
+      textFont(font2);
+      textSize(20);
       fill(255);
-      text("Press SPACE to start", background.width/2 - 30, 600);
+      text("Choose your player", background.width/2-30, 550);
+      image(player1, 70, 600);
+      image(player2, 70, 700);
+      image(player3, 70, 800);
+      textSize(15);
+      text("UNLOCKED", 300, 650);
+      textFont(font);
+      textSize(40);
+      text("Press a to equip", 300, 700);
+      if(player2unlocked == true){
+        textFont(font2);
+        textSize(15)
+        text("UNLOCKED", 300, 750);
+        textFont(font);
+        textSize(40);
+        text("Press b to equip", 300, 800);
+      }else{
+        textFont(font2);
+        textSize(15);
+        text("Required Score: 10", 300, 750);
+      }
+      if(player3unlocked == true){
+        textFont(font2);
+        textSize(15)
+        text("UNLOCKED", 300, 850);
+        textFont(font);
+        textSize(40);
+        text("Press c to equip", 300, 900);
+      }else{
+        textFont(font2);
+        textSize(15);
+        text("Required Score: 20", 300, 850);
+      }
     }
     
   } else {
@@ -145,6 +204,9 @@ function draw() {
 
 function keyPressed(){
   if(GameOver == false){
+    if(key == 'a'){
+      player = player;
+    }
   if(key == ' '){
     game_running = true;
     jump = 13;
@@ -155,6 +217,22 @@ function keyPressed(){
       GameOver = false;
       score = 0;
     }
+    }
+    
+    if(game_running == false){
+      if(key == 'a'){
+        player = player1;
+      }
+      if(player2unlocked == true){
+        if(key == 'b'){
+          player = player2;
+        }
+      }
+      if(player3unlocked == true){
+        if(key == 'c'){
+          player = player3;
+        }
+      }
     }
   }
 
