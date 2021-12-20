@@ -16,7 +16,7 @@ let player2unlocked, player3unlocked = false;
 
 function preload() {
   // Lädt die Bilder
-  background = loadImage("media/background.JPG");
+  background = loadImage("media/background3.jpg");
   player = loadImage("media/player.png");
   pipe_bottom = loadImage("media/bottom_pipe.png");
   pipe_top = loadImage("media/top_pipe.png");
@@ -39,7 +39,7 @@ function setup() {
   player2.resize(0,125);
   player3.resize(0, 125);
   logo.resize(0, 400);
-  background.resize(572, 1014);
+  background.resize(500, window.height);
 }
 
 function play() {
@@ -66,7 +66,10 @@ function play() {
     game_running = false;
     GameOver = true;
   }
-  text(score, 20, 30);
+  fill(000);
+  textFont(font2);
+  textSize(20);
+  text("Score:  " + score, 100, 30);
   
 }
 
@@ -121,16 +124,16 @@ function draw() {
       textSize(50);
       textFont(font2);
       fill(000);
-      text("Game Over", background.width/2 - 30, 200);
+      text("Game Over", background.width/2 , 200);
       image(GameOverLogo,game_size[0]/2-125, 250)
       textSize(30);
       textFont(font2);
       fill(255);
-      text("Score: " + score, background.width/2-30, 600);
+      text("Score: " + score, background.width/2, 600);
       textSize(50);
       textFont(font);
       fill(255);
-      text("Press ENTER to play again", background.width/2 - 30, 700);
+      text("Press ENTER to play again", background.width/2 , 700);
       if(score >= 10){
         score10 = score;
       }
@@ -152,17 +155,17 @@ function draw() {
       textSize(30);
       textFont(font2);
       fill(000);
-      text("Flying Guinea Pigs", background.width/2 - 30, 100);
-      image(logo, background.width/2-175, 100);
+      text("Flying Guinea Pigs", background.width/2 , 100);
+      image(logo, background.width/2-140, 100);
       textAlign(CENTER, CENTER);
       textSize(60);
       textFont(font);
       fill(000);
-      text("Press SPACE to start", background.width/2 - 30, 450);
+      text("Press SPACE to start", background.width/2 , 450);
       textFont(font2);
       textSize(20);
       fill(255);
-      text("Choose your player", background.width/2-30, 550);
+      text("Choose your player", background.width/2, 550);
       image(player1, 70, 600);
       image(player2, 70, 700);
       image(player3, 70, 800);
