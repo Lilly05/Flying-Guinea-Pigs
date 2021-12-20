@@ -1,4 +1,4 @@
-let background, player, pipe_bottom, pipe_top, logo, GameOverLogo;
+let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOverLogo, GameOverLogo1, GameOverLogo2, GameOverLogo3;
 let game_size = [572, 1014];
 let game_running = false;
 let game_started = false;
@@ -27,10 +27,15 @@ function preload() {
   player1 = loadImage("media/player.png");
   player2 = loadImage("media/player2.png");
   player3 = loadImage("media/player3.png");
+  logo1 = loadImage("media/logo.png");
+  logo2 = loadImage("media/logo2.png");
+  logo3 = loadImage("media/logo3.png");
+  GameOverLogo1 = loadImage("media/gameoverlogo.png");
+  GameOverLogo2 = loadImage("media/gameoverlogo2.png");
+  GameOverLogo3 = loadImage("media/gameoverlogo3.png");
 }
 
 function setup() {
-  //pipe_top.resize(300, 1000);
   game_size = [500, windowHeight-50];
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
@@ -207,9 +212,6 @@ function draw() {
 
 function keyPressed(){
   if(GameOver == false){
-    if(key == 'a'){
-      player = player;
-    }
   if(key == ' '){
     game_running = true;
     jump = 13;
@@ -225,15 +227,21 @@ function keyPressed(){
     if(game_running == false){
       if(key == 'a'){
         player = player1;
+        logo = logo1;
+        GameOverLogo = GameOverLogo1;
       }
       if(player2unlocked == true){
         if(key == 'b'){
           player = player2;
+          logo = logo2;
+          GameOverLogo = GameOverLogo2;
         }
       }
       if(player3unlocked == true){
         if(key == 'c'){
           player = player3;
+          logo = logo3;
+          GameOverLogo = GameOverLogo3;
         }
       }
     }
