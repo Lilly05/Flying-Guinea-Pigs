@@ -1,4 +1,4 @@
-let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOverLogo, GameOverLogo1, GameOverLogo2, GameOverLogo3;
+let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOverLogo, GameOverLogo1, GameOverLogo2, GameOverLogo3, song;
 let game_size = [572, 1014];
 let game_running = false;
 let game_started = false;
@@ -33,6 +33,7 @@ function preload() {
   GameOverLogo1 = loadImage("media/gameoverlogo.png");
   GameOverLogo2 = loadImage("media/gameoverlogo2.png");
   GameOverLogo3 = loadImage("media/gameoverlogo3.png");
+  //song = loadSound("media/tearsofice.mp3");
 }
 
 function setup() {
@@ -47,7 +48,8 @@ function setup() {
   background.resize(500, window.height);
 }
 
-function play() {
+function game() {
+  //song.play();
   pipe[0] -= pipe_speed; 
   if(pipe[0] < -pipe_top.width){
     pipe[0] = game_size[0];
@@ -206,7 +208,7 @@ function draw() {
     }
     
   } else {
-    play();
+    game();
   }
 }
 
