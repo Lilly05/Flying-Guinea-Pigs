@@ -1,4 +1,4 @@
-let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOverLogo, GameOverLogo1, GameOverLogo2, GameOverLogo3, song;
+let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOverLogo, GameOverLogo1, GameOverLogo2, GameOverLogo3, carrot;
 let game_size = [572, 1014];
 let game_running, GameOver  = false;
 let pipe = [600, 800];
@@ -7,6 +7,7 @@ let pipe_speed = 6;
 let jump, score10, score20 = 0;
 let score = 0;
 let playercoordinates = [100, 350];
+let carrotcoordinates = [100, 450];
 let player2unlocked, player3unlocked = false;
 
 function preload() {
@@ -25,7 +26,8 @@ function preload() {
   GameOverLogo2 = loadImage("media/gameoverlogo2.png");
   GameOverLogo3 = loadImage("media/gameoverlogo3.png");
   logo = loadImage("media/logo.png");
-  GameOverLogo = loadImage("media/gameoverlogo.png")
+  GameOverLogo = loadImage("media/gameoverlogo.png");
+  carrot = loadImage("media/carrot.png");
   font2 = loadFont("media/Pixeled.ttf");
   font = loadFont('media/Crumbled-Pixels.ttf');
 }
@@ -40,9 +42,18 @@ function setup() {
   player3.resize(0, 125);
   logo.resize(0, 400);
   background.resize(500, window.height);
+  carrot.resize(0, 150);
 }
 
 function game() {
+  carrotcoordinates[0] -= pipe_speed;
+  if(carrotcoordinates[0] < -carrot.width){
+    carrotcoordinates[0] = game_size[0];
+    carrotcoordinates[1] = 100 + random(game_size[1] - 100);
+    pipe_gab = 175;
+  }
+  image(carrot, carrotcoordinates[0], carrotcoordinates[1]);
+
   pipe[0] -= pipe_speed; 
   if(pipe[0] < -pipe_top.width){
     pipe[0] = game_size[0];
@@ -50,6 +61,7 @@ function game() {
     pipe_gab = 175;
     score += 1;
   }
+
   image(pipe_top, pipe[0], pipe[1]- pipe_top.height); // x Koordinate von der oberen Säule
   image(pipe_bottom, pipe[0], pipe[1]+ pipe_gab); // y Koordinate von der unteren Säule
 
@@ -65,6 +77,12 @@ function game() {
     pipe_gab =  175;
     game_running = false;
     GameOver = true;
+  }
+
+  if(collision(player, playercoordinates[0], playercoordinates[1], carrot, carrotcoordinates[0], carrotcoordinates[1]-carrot.height, carrotcoordinates[1])){
+    carrotcoordinates[0] = game_size[0];
+    carrotcoordinates[1] = 50 + random(game_size[1] - 175);
+    score += 3;
   }
   fill(000);
   textFont(font2);
