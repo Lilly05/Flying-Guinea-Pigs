@@ -1,29 +1,20 @@
 let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOverLogo, GameOverLogo1, GameOverLogo2, GameOverLogo3, song;
 let game_size = [572, 1014];
-let game_running = false;
-let game_started = false;
-let GameOver = false;
+let game_running, GameOver  = false;
 let pipe = [600, 800];
 let pipe_gab = 200;
 let pipe_speed = 6;
-let jump = 0;
-let playercoordinates = [100, 350];
-let x = 0;
+let jump, score10, score20 = 0;
 let score = 0;
-let score10, score20 = 0;
+let playercoordinates = [100, 350];
 let player2unlocked, player3unlocked = false;
 
-
 function preload() {
-  // Lädt die Bilder
+  // Lädt die Bilder und Schriften
   background = loadImage("media/background3.jpg");
   player = loadImage("media/player.png");
   pipe_bottom = loadImage("media/bottom_pipe.png");
   pipe_top = loadImage("media/top_pipe.png");
-  font = loadFont('media/Crumbled-Pixels.ttf');
-  logo = loadImage("media/logo.png");
-  GameOverLogo = loadImage("media/gameoverlogo.png")
-  font2 = loadFont("media/Pixeled.ttf");
   player1 = loadImage("media/player.png");
   player2 = loadImage("media/player2.png");
   player3 = loadImage("media/player3.png");
@@ -33,7 +24,10 @@ function preload() {
   GameOverLogo1 = loadImage("media/gameoverlogo.png");
   GameOverLogo2 = loadImage("media/gameoverlogo2.png");
   GameOverLogo3 = loadImage("media/gameoverlogo3.png");
-  //song = loadSound("media/tearsofice.mp3");
+  logo = loadImage("media/logo.png");
+  GameOverLogo = loadImage("media/gameoverlogo.png")
+  font2 = loadFont("media/Pixeled.ttf");
+  font = loadFont('media/Crumbled-Pixels.ttf');
 }
 
 function setup() {
@@ -49,7 +43,6 @@ function setup() {
 }
 
 function game() {
-  //song.play();
   pipe[0] -= pipe_speed; 
   if(pipe[0] < -pipe_top.width){
     pipe[0] = game_size[0];
@@ -77,43 +70,31 @@ function game() {
   textFont(font2);
   textSize(20);
   text("Score:  " + score, 100, 30);
-  
 }
 
 function collision(im1,x1,y1, im2,x2,y2, y3){
   if((x1 + im1.width / 2) > x2) { // Hier wird geprüft: trifft die Nase des Schweins in der Horizontalen auf eine Säule
     if(y1 < (y2 + im2.height - 50)){ // Hier wird geprüft: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der oberen Säule befindet
       if(x1 < x2 + 200){
-          //noLoop();
-        return true;
+        return true; // Es findet eine Kollision statt
       }else{
-        return false;
+        return false; // Es findet keine Kollision statt
       }
     }else{
-      if(y1 > y3 - 75){ // Hier noch zu prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
+      if(y1 > y3 - 75){ // Hier wird prüfen: fliegt das Schwein in der Vertikalen auf einer Höhe, die sich zwischen Beginn und Ende der unteren Säule befindet
         if(x1 < x2 + 200){
-          /*
-          console.log((x1 + im1.width / 2) > x2);
-          console.log(y1 > y,2 && y1 < (y2 + im2.height -50));
-          console.log(y1 > y3 -50);
-          console.log("x1: " + x1);
-          console.log("x2: " + x2);
-          console.log("y1: " + y1);
-          console.log("y2: " + y2);
-          console.log("y3:" + y3);
-          */
-          return true;
+          return true; // Es findet eine Kollision statt
         }else{
-          return false;
+          return false; // Es findet keine Kollision statt
         }
       }else{
-        return false;
+        return false; // Es findet keine Kollision statt
       }
     }
   }else if(y1 < 0){
-    return true;
+    return true; // Es findet eine Kollision statt
   }else if(y1 > 1000){
-    return true;
+    return true; // Es findet eine Kollision statt
   }
   else {
     return false; // Es findet keine Kollision statt
@@ -123,7 +104,6 @@ function collision(im1,x1,y1, im2,x2,y2, y3){
 
 function draw() {
   image(background, 0, 0);
-  
   if (!game_running) {
     if (GameOver == true){
       playercoordinates = [100, 350];
@@ -206,7 +186,6 @@ function draw() {
         text("Required Score: 20", 300, 850);
       }
     }
-    
   } else {
     game();
   }
@@ -225,7 +204,6 @@ function keyPressed(){
       score = 0;
     }
     }
-    
     if(game_running == false){
       if(key == 'a'){
         player = player1;
