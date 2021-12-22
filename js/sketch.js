@@ -2,7 +2,7 @@ let background, player, pipe_bottom, pipe_top, logo, logo1, logo2, logo3, GameOv
 let game_size = [572, 1014];
 let game_running, GameOver  = false;
 let pipe = [600, 800];
-let pipe_gab = 200;
+let pipe_gab = 175;
 let pipe_speed = 6;
 let jump, score10, score20 = 0;
 let score = 0;
@@ -25,7 +25,7 @@ function preload() {
   GameOverLogo2 = loadImage("media/gameoverlogo2.png");
   GameOverLogo3 = loadImage("media/gameoverlogo3.png");
   logo = loadImage("media/logo.png");
-  GameOverLogo = loadImage("media/gameoverlogo.png")
+  GameOverLogo = loadImage("media/gameoverlogo.png");
   font2 = loadFont("media/Pixeled.ttf");
   font = loadFont('media/Crumbled-Pixels.ttf');
 }
