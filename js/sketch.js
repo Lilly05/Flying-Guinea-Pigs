@@ -31,7 +31,7 @@ function preload() {
 }
 
 function setup() {
-  game_size = [500, windowHeight-50];
+  game_size = [500, 950];
   createCanvas(game_size[0], game_size[1]);
   background.resize(0, game_size[1]);
   player.resize(0, 125);
@@ -39,7 +39,7 @@ function setup() {
   player2.resize(0,125);
   player3.resize(0, 125);
   logo.resize(0, 400);
-  background.resize(500, window.height);
+  background.resize(500, 950);
 }
 
 function game() {
